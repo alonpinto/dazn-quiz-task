@@ -3,8 +3,7 @@ import Quiz from "./components/Quiz/Quiz";
 
 function App() {
   return (
-    <div>
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
+    <div className="flex h-full w-full justify-center items-center bg-slate-100 ">
       <Quiz />
     </div>
   );

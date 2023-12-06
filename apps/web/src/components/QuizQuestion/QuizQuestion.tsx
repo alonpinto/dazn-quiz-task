@@ -1,12 +1,25 @@
-import React, { FC } from 'react';
-import styles from './QuizQuestion.module.scss';
+import { QuestionClientDto } from "../../dtos/question.dto";
+import QuizOption from "../QuizOption/QuizOption";
 
-interface QuizQuestionProps {}
+interface QuizQuestionProps {
+  question: QuestionClientDto;
+  handleNextQuestion: () => void;
+}
 
-const QuizQuestion: FC<QuizQuestionProps> = () => (
-  <div className={styles.QuizQuestion}>
-    QuizQuestion Component
-  </div>
+const QuizQuestion = ({ question, handleNextQuestion }: QuizQuestionProps) => (
+  <>
+    <div>{question.question}</div>
+
+    <div>
+      {question.choices.map((option) => (
+        <QuizOption option={option} />
+      ))}
+    </div>
+
+    <div>
+      <input type="button" onClick={handleNextQuestion} value="Next Question" />
+    </div>
+  </>
 );
 
 export default QuizQuestion;

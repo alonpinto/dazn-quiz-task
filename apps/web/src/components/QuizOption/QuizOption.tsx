@@ -1,12 +1,7 @@
-import React, { FC } from 'react';
-import styles from './QuizOption.module.scss';
+interface QuizOptionProps {
+  option: string;
+}
 
-interface QuizOptionProps {}
-
-const QuizOption: FC<QuizOptionProps> = () => (
-  <div className={styles.QuizOption}>
-    QuizOption Component
-  </div>
-);
+const QuizOption = ({ option }: QuizOptionProps) => <div>{option}</div>;
 
 export default QuizOption;
