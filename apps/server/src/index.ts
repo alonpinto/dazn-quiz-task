@@ -1,5 +1,6 @@
 import dotenv from "dotenv";
 import express, { Application, Request, Response } from "express";
+import { questions } from "./mock/questions";
 
 //For env File
 dotenv.config();
@@ -9,11 +10,11 @@ const port = process.env.PORT || 8000;
 
 const router = express.Router();
 
-router.get("/", (req: Request, res: Response) => {
-  return res.send("hello world");
+router.get("/quiz", (req: Request, res: Response) => {
+  return res.send(questions);
 });
 
-app.use(router);
+app.use("/api", router);
 
 app.listen(port, () => {
   console.log(`==========================================`);
