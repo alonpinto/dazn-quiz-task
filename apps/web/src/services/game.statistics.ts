@@ -35,7 +35,7 @@ const gameStatisticsService = () => {
   };
 
   const getQuestionIndexById = (id: number) => {
-    return gameStatistics.questions.findIndex((q) => (q.id = id));
+    return gameStatistics.questions.findIndex((q) => q.id === id);
   };
 
   const reportQuestionShow = ({ id, timestamp }: IReportGuessArgs) => {
@@ -49,9 +49,18 @@ const gameStatisticsService = () => {
   const reportQuestionHide = ({ id, guess, timestamp }: IReportGuessArgs) => {
     const questionIndex = getQuestionIndexById(id);
 
-    if (questionIndex > 0) {
+    if (questionIndex > -1) {
       gameStatistics.questions[questionIndex].end = timestamp;
       gameStatistics.questions[questionIndex].guess = guess;
+    }
+    console.log(`gameStatisticsService`, gameStatistics);
+  };
+
+  const reportHintShow = (id: number) => {
+    const questionIndex = getQuestionIndexById(id);
+
+    if (questionIndex > -1) {
+      gameStatistics.questions[questionIndex].isHintGiven = true;
     }
     console.log(`gameStatisticsService`, gameStatistics);
   };
@@ -65,6 +74,7 @@ const gameStatisticsService = () => {
     reportQuestionShow,
     reportGameEnd,
     reportQuestionHide,
+    reportHintShow,
     getReport,
   };
 };

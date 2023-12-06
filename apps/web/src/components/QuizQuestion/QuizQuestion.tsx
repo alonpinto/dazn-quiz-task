@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { QuestionClientDto } from "../../dtos/question.dto";
+import { GameStatisticsService } from "../../services/game.statistics";
 import QuizSetting from "../../settings/quiz.settings";
 import QuizOption from "../QuizOption/QuizOption";
 
@@ -14,6 +15,17 @@ const QuizQuestion = ({ question, handleNextQuestion }: QuizQuestionProps) => {
 
   const showHint = () => {
     setHint(question.hint);
+    GameStatisticsService.reportHintShow(question.id);
+  };
+
+  const questionHide = () => {
+    setHint(question.hint);
+    GameStatisticsService.reportQuestionHide({
+      id: question.id,
+      guess,
+      timestamp: Date.now(),
+    });
+    onNextQuestion();
   };
 
   useEffect(() => {
@@ -25,7 +37,7 @@ const QuizQuestion = ({ question, handleNextQuestion }: QuizQuestionProps) => {
     );
 
     const timeEndedTimer = setTimeout(
-      ()=>onNextQuestion,
+      questionHide,
       QuizSetting.answerSessionTimeInSeconds
     );
 
@@ -42,7 +54,13 @@ const QuizQuestion = ({ question, handleNextQuestion }: QuizQuestionProps) => {
 
   const handleUserGuess = (guess: string) => {
     setGuess(guess);
-    console.log(`guess`, guess);
+
+    GameStatisticsService.reportQuestionHide({
+      id: question.id,
+      guess,
+      timestamp: Date.now(),
+    });
+
     setTimeout(() => {
       setGuess(undefined);
       onNextQuestion();

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { QuestionClientDto } from "../../dtos/question.dto";
 
+import { IGameStatistics } from "../../interfaces/IGameStatistics";
 import { GameStatisticsService } from "../../services/game.statistics";
 import QuizQuestion from "../QuizQuestion/QuizQuestion";
 import { GameStatus } from "./GameStatus";
@@ -21,6 +22,10 @@ const Game = ({
   const [question, setQuestion] = useState<QuestionClientDto | undefined>(
     undefined
   );
+
+  const [gameStatistics, setGameStatistics] = useState<
+    IGameStatistics | undefined
+  >(undefined);
 
   useEffect(() => {
     if (questions?.length) {
@@ -47,12 +52,18 @@ const Game = ({
     } else {
       setGameStatus(GameStatus.ENDED);
       GameStatisticsService.reportGameEnd(Date.now());
+      setGameStatistics(GameStatisticsService.getReport());
     }
   };
 
   return (
     <div>
-      {gameStatus === GameStatus.ENDED && <div> Game ended</div>}
+      {gameStatus === GameStatus.ENDED && (
+        <>
+          <div> Game ended </div>
+          <div>{JSON.stringify(gameStatistics)}</div>
+        </>
+      )}
 
       {gameStatus === GameStatus.READY_TO_PLAY ||
       gameStatus === GameStatus.ENDED ? (
