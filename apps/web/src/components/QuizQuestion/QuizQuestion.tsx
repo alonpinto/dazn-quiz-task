@@ -33,7 +33,7 @@ const QuizQuestion = ({ question, handleNextQuestion }: QuizQuestionProps) => {
       clearTimeout(showHintTimer);
       clearTimeout(timeEndedTimer);
     };
-  }, []);
+  }, [question]);
 
   const onNextQuestion = () => {
     setHint(undefined);
@@ -46,7 +46,7 @@ const QuizQuestion = ({ question, handleNextQuestion }: QuizQuestionProps) => {
     setTimeout(() => {
       setGuess(undefined);
       onNextQuestion();
-    }, 1000);
+    }, QuizSetting.moveToNextQuestionAfterGuess);
   };
 
   // const getGuessStatus = (index): GuessStatus => {
