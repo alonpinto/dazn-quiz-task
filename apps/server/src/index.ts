@@ -3,6 +3,7 @@ import express, { Application, Request, Response } from "express";
 import Config from "./config";
 import { prepareQuizForClient } from "./mappers";
 import { questions } from "./mock/questions";
+import { fetchRandomQuestion } from "./utils/helpers";
 
 //For env File
 dotenv.config();
@@ -14,10 +15,9 @@ const router = express.Router();
 
 router.get("/quiz", (req: Request, res: Response) => {
   const size = Number(req.query?.size || Config.defaultQuizSize);
-
-  const quiz = prepareQuizForClient(questions.slice(0, size));
-
-  return res.send(quiz);
+  const shuffled = fetchRandomQuestion(questions, size);
+  const _questions = prepareQuizForClient(shuffled);
+  return res.send(_questions);
 });
 
 app.use("/api", router);
