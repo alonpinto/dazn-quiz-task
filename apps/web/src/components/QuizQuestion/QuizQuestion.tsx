@@ -23,8 +23,14 @@ const QuizQuestion = ({ question, handleNextQuestion }: QuizQuestionProps) => {
       QuizSetting.showHintTimeInSeconds
     );
 
+    const timeEndedTimer = setTimeout(
+      onNextQuestion,
+      QuizSetting.answerSessionTimeInSeconds
+    );
+
     return () => {
       clearTimeout(showHintTimer);
+      clearTimeout(timeEndedTimer);
     };
   }, []);
 
@@ -43,9 +49,6 @@ const QuizQuestion = ({ question, handleNextQuestion }: QuizQuestionProps) => {
         ))}
       </div>
 
-      <div>
-        <input type="button" onClick={onNextQuestion} value="Next Question" />
-      </div>
       {hint && <div>Hint:{hint}</div>}
     </>
   );
