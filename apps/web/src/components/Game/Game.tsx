@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { QuestionClientDto } from "../../dtos/question.dto";
 
 import { GameStatisticsService } from "../../services/game.statistics";
+import GameStatistics from "../GameStatistics/GameStatistics";
 import QuizQuestion from "../QuizQuestion/QuizQuestion";
 import { GameStatus } from "./GameStatus";
-import GameStatistics from "../GameStatistics/GameStatistics";
 
 interface GameProps {
   handleNewGameClicked: () => void;
@@ -52,11 +52,10 @@ const Game = ({
   };
 
   return (
-    <div>
+    <div className="flex align-middle">
       {gameStatus === GameStatus.ENDED && (
         <>
-          <div> Game ended </div>
-          <GameStatistics />
+          <h2> Game Ended </h2>
         </>
       )}
 
@@ -70,6 +69,12 @@ const Game = ({
         />
       ) : (
         <div>No Question</div>
+      )}
+
+      {gameStatus === GameStatus.ENDED && (
+        <>
+          <GameStatistics />
+        </>
       )}
     </div>
   );

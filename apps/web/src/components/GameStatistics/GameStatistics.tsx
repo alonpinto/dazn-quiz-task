@@ -34,26 +34,27 @@ const GameStatistics = () => {
 
   return (
     <div className="py-24">
-      <h1 className="text-2xl">Game Statistic</h1>
+      <h3 className="text-lg">Game Statistic</h3>
+      <section>
+        <div>Game Duration: {gameDurationInSeconds.toFixed(0)} seconds</div>
+        <div>Correct Answers: {numberOfCurrentAnswers}</div>
+        <div>Wrong Answers: {numberOfWrongAnswers}</div>
+        <div>Unanswered : {numberOfUnansweredQuestions}</div>
+        <div>
+          Average Time Per Guess:{" "}
+          {(gameDurationInSeconds / numberOfQuestions).toFixed(2)}
+        </div>
+        <div>
+          Average Time Per Correct Answers:{" "}
+          {(durationForCorrectAnswer / numberOfCurrentAnswers).toFixed(2)}
+        </div>
 
-      <div>Game Duration: {gameDurationInSeconds.toFixed(0)} seconds</div>
-      <div>Correct Answers: {numberOfCurrentAnswers}</div>
-      <div>Wrong Answers: {numberOfWrongAnswers}</div>
-      <div>Unanswered : {numberOfUnansweredQuestions}</div>
-      <div>
-        Average Time Per Guess:{" "}
-        {(gameDurationInSeconds / numberOfQuestions).toFixed(2)}
-      </div>
-      <div>
-        Average Time Per Correct Answers:{" "}
-        {(durationForCorrectAnswer / numberOfCurrentAnswers).toFixed(2)}
-      </div>
-
-      <div>
-        Average Time Per Wrong Answer:{" "}
-        {(durationForWrongAnswer / numberOfWrongAnswers).toFixed(2)}
-      </div>
-      <div>Given Hints:{givenHint}</div>
+        <div>
+          Average Time Per Wrong Answer:{" "}
+          {(durationForWrongAnswer / numberOfWrongAnswers).toFixed(2)}
+        </div>
+        <div>Given Hints:{givenHint}</div>
+      </section>
     </div>
   );
 };
