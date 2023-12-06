@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { QuestionClientDto } from "../../dtos/question.dto";
-import { GameStatus } from "../../enums/GameStatus";
+
+import { GameStatisticsService } from "../../services/game.statistics";
 import QuizQuestion from "../QuizQuestion/QuizQuestion";
+import { GameStatus } from "./GameStatus";
 
 interface GameProps {
   handleNewGameClicked: () => void;
@@ -22,7 +24,13 @@ const Game = ({
 
   useEffect(() => {
     if (questions?.length) {
-      setQuestion(questions.pop());
+      const question = questions.pop();
+      setQuestion(question);
+      GameStatisticsService.reportQuestionShow({
+        id: question!.id,
+        timestamp: Date.now(),
+        guess: undefined,
+      });
     }
   }, [questions]);
 
@@ -30,8 +38,15 @@ const Game = ({
     const question = questions.pop();
     if (question) {
       setQuestion(question);
+
+      GameStatisticsService.reportQuestionShow({
+        id: question!.id,
+        timestamp: Date.now(),
+        guess: undefined,
+      });
     } else {
       setGameStatus(GameStatus.ENDED);
+      GameStatisticsService.reportGameEnd(Date.now());
     }
   };
 

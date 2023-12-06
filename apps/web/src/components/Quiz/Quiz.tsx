@@ -1,8 +1,10 @@
 import { FC, useState } from "react";
 import { QuestionClientDto } from "../../dtos/question.dto";
-import { GameStatus } from "../../enums/GameStatus";
+
+import { GameStatisticsService } from "../../services/game.statistics";
 import { quizApiService } from "../../services/quiz.api.service";
 import Game from "../Game/Game";
+import { GameStatus } from "../Game/GameStatus";
 
 interface QuizProps {}
 
@@ -16,6 +18,7 @@ const Quiz: FC<QuizProps> = () => {
     const _questions = await quizApiService.getQuestions();
     setQuestions(_questions);
     setGameStatus(GameStatus.STARTED);
+    GameStatisticsService.initGameStatistic(_questions);
   };
 
   return (

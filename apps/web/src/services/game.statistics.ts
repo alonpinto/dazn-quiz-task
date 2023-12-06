@@ -1,37 +1,19 @@
 import { QuestionClientDto } from "../dtos/question.dto";
-
-export interface IGameStatistics {
-  game: { start: number; end: number };
-  questions: QuestionStatistic[];
-}
+import { IGameStatistics } from "../interfaces/IGameStatistics";
+import { IReportGuessArgs } from "../interfaces/IReportGuessArgs";
 
 const blankStatistics = {
   game: { start: 0, end: 0 },
   questions: [],
 };
 
-export interface QuestionStatistic {
-  id: number;
-  start: number;
-  end: number;
-  answer: string;
-  guess?: string;
-  isHintGiven?: boolean;
-  score?: number;
-}
-
-interface IReportGuessArgs {
-  id: number;
-  guess: string | undefined;
-  timestamp: number;
-}
-
-const quizStatisticsService = () => {
+const gameStatisticsService = () => {
   let gameStatistics: IGameStatistics;
 
   function initGameStatistic(questions: QuestionClientDto[]) {
-    gameStatistics.game.start = Date.now();
     gameStatistics = blankStatistics;
+    gameStatistics.game.start = Date.now();
+
     gameStatistics.questions = questions.map((_question) => {
       const { id, answer } = _question;
       return {
@@ -43,30 +25,35 @@ const quizStatisticsService = () => {
         guess: undefined,
       };
     });
+
+    console.log(`gameStatisticsService`, gameStatistics);
   }
 
   const reportGameEnd = (timestamp: number) => {
     gameStatistics.game.end = timestamp;
+    console.log(`gameStatisticsService`, gameStatistics);
   };
 
   const getQuestionIndexById = (id: number) => {
     return gameStatistics.questions.findIndex((q) => (q.id = id));
   };
 
-  const reportGuessStart = ({ id, timestamp }: IReportGuessArgs) => {
+  const reportQuestionShow = ({ id, timestamp }: IReportGuessArgs) => {
     const questionIndex = getQuestionIndexById(id);
     if (questionIndex > 0) {
       gameStatistics.questions[questionIndex].start = timestamp;
     }
+    console.log(`gameStatisticsService`, gameStatistics);
   };
 
-  const reportGuessEnd = ({ id, guess, timestamp }: IReportGuessArgs) => {
+  const reportQuestionHide = ({ id, guess, timestamp }: IReportGuessArgs) => {
     const questionIndex = getQuestionIndexById(id);
 
     if (questionIndex > 0) {
       gameStatistics.questions[questionIndex].end = timestamp;
       gameStatistics.questions[questionIndex].guess = guess;
     }
+    console.log(`gameStatisticsService`, gameStatistics);
   };
 
   const getReport = (): IGameStatistics => {
@@ -75,13 +62,13 @@ const quizStatisticsService = () => {
 
   return {
     initGameStatistic,
-    reportGuessStart,
+    reportQuestionShow,
     reportGameEnd,
-    reportGuessEnd,
+    reportQuestionHide,
     getReport,
   };
 };
 
-const QuizStatisticsService = quizStatisticsService();
+const GameStatisticsService = gameStatisticsService();
 
-export { QuizStatisticsService as QuizStatisticsService };
+export { GameStatisticsService as GameStatisticsService };

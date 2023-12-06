@@ -25,7 +25,7 @@ const QuizQuestion = ({ question, handleNextQuestion }: QuizQuestionProps) => {
     );
 
     const timeEndedTimer = setTimeout(
-      onNextQuestion,
+      ()=>onNextQuestion,
       QuizSetting.answerSessionTimeInSeconds
     );
 
