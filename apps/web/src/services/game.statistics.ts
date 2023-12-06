@@ -40,7 +40,7 @@ const gameStatisticsService = () => {
 
   const reportQuestionShow = ({ id, timestamp }: IReportGuessArgs) => {
     const questionIndex = getQuestionIndexById(id);
-    if (questionIndex > 0) {
+    if (questionIndex > -1) {
       gameStatistics.questions[questionIndex].start = timestamp;
     }
     console.log(`gameStatisticsService`, gameStatistics);

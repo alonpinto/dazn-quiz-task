@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { QuestionClientDto } from "../../dtos/question.dto";
 
-import { IGameStatistics } from "../../interfaces/IGameStatistics";
 import { GameStatisticsService } from "../../services/game.statistics";
 import QuizQuestion from "../QuizQuestion/QuizQuestion";
 import { GameStatus } from "./GameStatus";
+import GameStatistics from "../GameStatistics/GameStatistics";
 
 interface GameProps {
   handleNewGameClicked: () => void;
@@ -23,19 +23,15 @@ const Game = ({
     undefined
   );
 
-  const [gameStatistics, setGameStatistics] = useState<
-    IGameStatistics | undefined
-  >(undefined);
-
   useEffect(() => {
     if (questions?.length) {
       const question = questions.pop();
-      setQuestion(question);
       GameStatisticsService.reportQuestionShow({
         id: question!.id,
         timestamp: Date.now(),
         guess: undefined,
       });
+      setQuestion(question);
     }
   }, [questions]);
 
@@ -52,7 +48,6 @@ const Game = ({
     } else {
       setGameStatus(GameStatus.ENDED);
       GameStatisticsService.reportGameEnd(Date.now());
-      setGameStatistics(GameStatisticsService.getReport());
     }
   };
 
@@ -61,7 +56,7 @@ const Game = ({
       {gameStatus === GameStatus.ENDED && (
         <>
           <div> Game ended </div>
-          <div>{JSON.stringify(gameStatistics)}</div>
+          <GameStatistics />
         </>
       )}
 
