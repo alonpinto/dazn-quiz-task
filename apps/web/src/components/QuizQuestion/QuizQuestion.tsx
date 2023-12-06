@@ -10,6 +10,7 @@ interface QuizQuestionProps {
 
 const QuizQuestion = ({ question, handleNextQuestion }: QuizQuestionProps) => {
   const [hint, setHint] = useState<string | undefined>(undefined);
+  const [guess, setGuess] = useState<string | undefined>(undefined);
 
   const showHint = () => {
     setHint(question.hint);
@@ -39,13 +40,36 @@ const QuizQuestion = ({ question, handleNextQuestion }: QuizQuestionProps) => {
     handleNextQuestion();
   };
 
+  const handleUserGuess = (guess: string) => {
+    setGuess(guess);
+    console.log(`guess`, guess);
+    setTimeout(() => {
+      setGuess(undefined);
+      onNextQuestion();
+    }, 1000);
+  };
+
+  // const getGuessStatus = (index): GuessStatus => {
+  //   if (!guess) return GuessStatus.NONE;
+
+  //   return guess === question.answer ? GuessStatus.CORRECT : GuessStatus.WRONG;
+  // };
+
   return (
     <>
-      <div>{question.question}</div>
+      <div>
+        {question.question}{" "}
+        {guess && <>{guess === question.answer ? "Correct" : "Wrong"}</>}
+      </div>
 
       <div>
         {question.choices.map((option) => (
-          <QuizOption option={option} />
+          <QuizOption
+            key={option}
+            option={option}
+            handleUserGuess={handleUserGuess}
+            // status={getGuessStatus(index)}
+          />
         ))}
       </div>
 
