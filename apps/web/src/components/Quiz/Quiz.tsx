@@ -1,12 +1,20 @@
-import React, { FC } from 'react';
-import styles from './Quiz.module.scss';
+import { FC, useEffect, useState } from "react";
+import { QuestionClientDto } from "../../dtos/question.dto";
+import { quizApiService } from "../../services/quiz.api.service";
 
 interface QuizProps {}
 
-const Quiz: FC<QuizProps> = () => (
-  <div className={styles.Quiz}>
-    Quiz Component
-  </div>
-);
+const Quiz: FC<QuizProps> = () => {
+  const [questions, setQuestions] = useState<QuestionClientDto[]>([]);
+
+  useEffect(() => {
+    (async () => {
+      const _questions = await quizApiService.getQuestions();
+      setQuestions(_questions);
+    })();
+  }, []);
+
+  return <div> {JSON.stringify(questions)}</div>;
+};
 
 export default Quiz;
