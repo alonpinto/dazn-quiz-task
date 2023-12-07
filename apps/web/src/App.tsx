@@ -1,10 +1,14 @@
+import "tw-elements-react/dist/css/tw-elements-react.min.css";
 import "./App.css";
 import Quiz from "./components/Quiz/Quiz";
 
 function App() {
   return (
-    <div className="flex w-1/2 h-full justify-center items-center bg-slate-100 align-middle text-center">
-      <Quiz />
+    <div className="container my-24 mx-auto md:px-6">
+      <h2 className="mb-12 text-3xl font-bold">Quiz Game</h2>
+      <section className="mb-32 text-center">
+        <Quiz />
+      </section>
     </div>
   );
 }
