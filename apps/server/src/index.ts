@@ -9,7 +9,7 @@ import { fetchRandomQuestion } from "./utils/helpers";
 dotenv.config();
 
 const app: Application = express();
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 4000;
 
 const router = express.Router();
 
