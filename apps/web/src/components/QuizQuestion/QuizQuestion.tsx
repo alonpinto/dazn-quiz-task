@@ -83,7 +83,7 @@ const QuizQuestion = ({ question, handleNextQuestion }: QuizQuestionProps) => {
           />
         ))}
 
-        {hint && <div>Hint:{hint}</div>}
+        {hint && <div className=" text-green-600">Hint:{hint}</div>}
       </ul>
     </>
   );

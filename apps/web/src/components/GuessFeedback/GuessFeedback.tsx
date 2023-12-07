@@ -13,7 +13,7 @@ const GuessFeedback = ({ guess, answer }: GuessStatusProps) => {
       {guess === answer ? (
         <div className=" text-green-700 text-sm"> Good Job</div>
       ) : (
-        <div className=" text-red-700 text-sm">Ops! answer is [{answer}]</div>
+        <div className=" text-red-700 text-sm">Opps! answer is [{answer}]</div>
       )}
     </div>
   );
