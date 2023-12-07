@@ -1,8 +1,14 @@
 # dazn-quiz-task
 
+# how to run the project
+
 # install projets dependencies
 
 pnpm install
+
+# will run the dev and the server parallel
+
+pnpm rum dev
 
 # Common pnpm tasks
 
@@ -14,9 +20,9 @@ pnpm run --filter client build
 
 # Query mock server to get quiz
 
-# [size] is optinal default value 5
+http://localhost:[REPLACE_WITH_ENV_PORT]/api/quiz?size=5
 
-http://localhost:4000/api/quiz?size=5
+# [size] is optinal default value 5
 
 # Response example
 
