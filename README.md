@@ -8,7 +8,7 @@ pnpm install
 
 # will run the dev and the server parallel
 
-pnpm rum dev
+pnpm run dev
 
 # Common pnpm tasks
 

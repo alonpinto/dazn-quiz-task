@@ -1,4 +1,3 @@
-import "tw-elements-react/dist/css/tw-elements-react.min.css";
 import "./App.css";
 import Quiz from "./components/Quiz/Quiz";
 
