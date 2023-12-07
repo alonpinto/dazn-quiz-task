@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { QuestionClientDto } from "../../dtos/question.dto";
+import type { QuestionClientDto } from "@dazn/common";
 
 import { GameStatisticsService } from "../../services/game.statistics";
 import { quizApiService } from "../../services/quiz.api.service";

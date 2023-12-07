@@ -1,5 +1,5 @@
 import Config from "../config";
-import { QuestionClientDto } from "../dtos/question.dto";
+import type { QuestionClientDto } from "@dazn/common";
 import QuizSetting from "../settings/quiz.settings";
 
 interface QuizServiceProps {

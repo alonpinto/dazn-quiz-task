@@ -1,4 +1,5 @@
-import { QuestionClientDto, QuestionServerDto } from "../dtos/index.dto";
+import type { QuestionClientDto } from "@dazn/common";
+import { QuestionServerDto } from "../dtos/index.dto";
 
 export const mapServerToClientDto = (
   serverDto: QuestionServerDto

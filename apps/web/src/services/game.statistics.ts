@@ -1,4 +1,4 @@
-import { QuestionClientDto } from "../dtos/question.dto";
+import type { QuestionClientDto } from "@dazn/common";
 import { IGameStatistics } from "../interfaces/IGameStatistics";
 import { IReportGuessArgs } from "../interfaces/IReportGuessArgs";
 

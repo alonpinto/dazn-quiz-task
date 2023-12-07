@@ -4,8 +4,11 @@
   "description": "",
   "main": "./dist/index.js",
   "scripts": {
+    "build:common": "pnpm run --filter common build",
+    "prebuild:server": "pnpm run build:common",
     "build:server": "pnpm run --filter server build",
     "dev:server": "pnpm run --filter server dev",
+    "prebuild:client": "pnpm run build:common",
     "build:client": "pnpm run --filter client build",
     "dev:client": "pnpm run --filter client dev",
     "predev": "pnpm run build:server",

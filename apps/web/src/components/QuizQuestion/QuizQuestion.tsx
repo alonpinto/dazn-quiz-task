@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { QuestionClientDto } from "../../dtos/question.dto";
+import type { QuestionClientDto } from "@dazn/common";
 import { GameStatisticsService } from "../../services/game.statistics";
 import QuizSetting from "../../settings/quiz.settings";
 import QuizOption from "../QuizOption/QuizOption";
