@@ -29,7 +29,6 @@ const QuizQuestion = ({ question, handleNextQuestion }: QuizQuestionProps) => {
   };
 
   useEffect(() => {
-    // console.log(`question`, data.question);
     setHint(undefined);
     const showHintTimer = setTimeout(
       showHint,

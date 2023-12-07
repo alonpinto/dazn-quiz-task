@@ -25,13 +25,10 @@ const gameStatisticsService = () => {
         guess: undefined,
       };
     });
-
-    console.log(`gameStatisticsService`, gameStatistics);
   }
 
   const reportGameEnd = (timestamp: number) => {
     gameStatistics.game.end = timestamp;
-    console.log(`gameStatisticsService`, gameStatistics);
   };
 
   const getQuestionIndexById = (id: number) => {
@@ -43,7 +40,6 @@ const gameStatisticsService = () => {
     if (questionIndex > -1) {
       gameStatistics.questions[questionIndex].start = timestamp;
     }
-    console.log(`gameStatisticsService`, gameStatistics);
   };
 
   const reportQuestionHide = ({ id, guess, timestamp }: IReportGuessArgs) => {
@@ -53,7 +49,6 @@ const gameStatisticsService = () => {
       gameStatistics.questions[questionIndex].end = timestamp;
       gameStatistics.questions[questionIndex].guess = guess;
     }
-    console.log(`gameStatisticsService`, gameStatistics);
   };
 
   const reportHintShow = (id: number) => {
@@ -62,7 +57,6 @@ const gameStatisticsService = () => {
     if (questionIndex > -1) {
       gameStatistics.questions[questionIndex].isHintGiven = true;
     }
-    console.log(`gameStatisticsService`, gameStatistics);
   };
 
   const getReport = (): IGameStatistics => {
