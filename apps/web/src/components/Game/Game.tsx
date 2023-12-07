@@ -6,18 +6,12 @@ import QuizQuestion from "../QuizQuestion/QuizQuestion";
 import { GameStatus } from "./GameStatus";
 
 interface GameProps {
-  handleNewGameClicked: () => void;
   questions: QuestionClientDto[];
   gameStatus: GameStatus;
   setGameStatus: (newStatus: GameStatus) => void;
 }
 
-const Game = ({
-  handleNewGameClicked,
-  questions,
-  gameStatus,
-  setGameStatus,
-}: GameProps) => {
+const Game = ({ questions, gameStatus, setGameStatus }: GameProps) => {
   const [question, setQuestion] = useState<QuestionClientDto | undefined>(
     undefined
   );

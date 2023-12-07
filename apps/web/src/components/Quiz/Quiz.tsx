@@ -40,7 +40,6 @@ const Quiz: FC<QuizProps> = () => {
         </button>
       ) : (
         <Game
-          handleNewGameClicked={handleNewGameClicked}
           questions={questions}
           gameStatus={gameStatus}
           setGameStatus={setGameStatus}
