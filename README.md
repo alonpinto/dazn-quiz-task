@@ -1,8 +1,14 @@
 # dazn-quiz-task
 
+# how to run the project
+
 # install projets dependencies
 
 pnpm install
+
+# will run the dev and the server parallel
+
+pnpm rum dev
 
 # Common pnpm tasks
 
