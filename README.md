@@ -6,7 +6,7 @@
 
 pnpm install
 
-# will run the dev and the server parallel
+# will run the project on dev mode run the following
 
 pnpm run dev
 
