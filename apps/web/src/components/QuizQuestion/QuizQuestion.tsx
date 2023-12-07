@@ -52,13 +52,12 @@ const QuizQuestion = ({ question, handleNextQuestion }: QuizQuestionProps) => {
   };
 
   const handleUserGuess = (guess: string) => {
-    setGuess(guess);
-
     GameStatisticsService.reportQuestionHide({
       id: question.id,
       guess,
       timestamp: Date.now(),
     });
+    setGuess(guess);
 
     setTimeout(() => {
       setGuess(undefined);

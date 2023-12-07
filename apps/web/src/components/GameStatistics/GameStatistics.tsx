@@ -17,7 +17,7 @@ const GameStatistics = () => {
 
   const gameDurationInSeconds =
     (statistics.game.end - statistics.game.start) / 1000;
-  const numberOfCurrentAnswers = correctAnswers.length;
+  const numberOfCorrectAnswers = correctAnswers.length;
   const numberOfWrongAnswers = wrongAnswers.length;
   const givenHint = statistics.questions.filter((q) => !!q.isHintGiven).length;
 
@@ -51,7 +51,7 @@ const GameStatistics = () => {
             />
             <GameStatisticField
               title="Correct Answers"
-              value={numberOfWrongAnswers}
+              value={numberOfCorrectAnswers}
             />
 
             <GameStatisticField
@@ -69,17 +69,23 @@ const GameStatistics = () => {
               value={(gameDurationInSeconds / numberOfQuestions).toFixed(2)}
             />
 
-            <GameStatisticField
-              title="Average Time Per Correct Answers"
-              value={(
-                durationForCorrectAnswer / numberOfCurrentAnswers
-              ).toFixed(2)}
-            />
+            {numberOfCorrectAnswers > 0 && (
+              <GameStatisticField
+                title="Average Time Per Correct Answers"
+                value={(
+                  durationForCorrectAnswer / numberOfCorrectAnswers
+                ).toFixed(2)}
+              />
+            )}
 
-            <GameStatisticField
-              title="Average Time Per Wrong Answer"
-              value={(durationForWrongAnswer / numberOfWrongAnswers).toFixed(2)}
-            />
+            {numberOfWrongAnswers > 0 && (
+              <GameStatisticField
+                title="Average Time Per Wrong Answer"
+                value={(durationForWrongAnswer / numberOfWrongAnswers).toFixed(
+                  2
+                )}
+              />
+            )}
 
             <GameStatisticField title="Given Hints" value={givenHint} />
           </tbody>
