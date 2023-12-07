@@ -12,8 +12,6 @@ interface GameProps {
 }
 
 const Game = ({ questions, gameStatus, setGameStatus }: GameProps) => {
-  console.log(`questions`, questions.length);
-
   const [question, setQuestion] = useState<QuestionClientDto | undefined>(
     undefined
   );
@@ -30,7 +28,6 @@ const Game = ({ questions, gameStatus, setGameStatus }: GameProps) => {
   const handleNextQuestion = useCallback(() => {
     const question = questions.pop();
 
-    console.log(`handleNextQuestion`, questions.length, question?.question);
     if (question) {
       setQuestion(question);
 
