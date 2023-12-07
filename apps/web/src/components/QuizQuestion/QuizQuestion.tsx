@@ -78,6 +78,7 @@ const QuizQuestion = ({ question, handleNextQuestion }: QuizQuestionProps) => {
             option={option}
             handleUserGuess={handleUserGuess}
             answer={question.answer}
+            disabled={!!guess}
             // status={getGuessStatus(index)}
           />
         ))}

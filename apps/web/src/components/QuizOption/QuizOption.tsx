@@ -7,15 +7,19 @@ interface QuizOptionProps {
   status?: GuessStatus;
   answer: string;
   handleUserGuess: (guess: string) => void;
+  disabled: boolean;
 }
 
-const QuizOption = ({ option, handleUserGuess, answer }: QuizOptionProps) => {
+const QuizOption = ({
+  option,
+  handleUserGuess,
+  answer,
+  disabled,
+}: QuizOptionProps) => {
   const [guess, setGuess] = useState<string | undefined>(undefined);
   const [checked, setChecked] = useState<boolean>(false);
-  const [disabled, setDisabled] = useState<boolean>(false);
 
   const onUserGuess = (e: ChangeEvent<HTMLInputElement>) => {
-    setDisabled(true);
     const currGuess = e.target!.value;
     setChecked(currGuess === option);
     setGuess(currGuess);
