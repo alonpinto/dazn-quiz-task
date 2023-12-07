@@ -1,28 +1,45 @@
 # dazn-quiz-task
 
-# how to run the project
+<h2>🛠️ Installation Steps:</h2>
 
-# install projets dependencies
+<p>1. git clone https://github.com/alonpinto/dazn-quiz-task.git</p>
 
-pnpm install
+<p>2. cd ./dazn-quiz-task</p>
 
-# will run the project on dev mode run the following
+<p>3. pnpm install</p>
 
-pnpm run dev
+<p>4. pnpm run dev</p>
+
+# Notice
+
+<p>Changing the server port requires a change to vite.config.ts
+</p>
+<code>
+server: {
+    proxy: {
+      "/api": {
+        target: "http://localhost:4000",
+        changeOrigin: false,
+      },
+    },
+  },
+</code>
 
 # Common pnpm tasks
 
-pnpm run --filter server dev
-pnpm run --filter client dev
+<p>pnpm run --filter server dev</p>
+<p>pnpm run --filter client dev</p>
 
-pnpm run --filter server build
-pnpm run --filter client build
+<p>pnpm run --filter server build</p>
+<p>pnpm run --filter client build</p>
 
-# Query mock server to get quiz
+# Mock Server
 
-http://localhost:[REPLACE_WITH_ENV_PORT]/api/quiz?size=5
+http://localhost:4000/api/quiz?size=5
 
-# [size] is optinal default value 5
+<p>
+the size parameter is optional and set to 5 by default. The size of the quiz can be changed in the quiz settings
+</p>
 
 # Response example
 
