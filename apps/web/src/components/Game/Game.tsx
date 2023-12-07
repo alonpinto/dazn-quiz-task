@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { QuestionClientDto } from "../../dtos/question.dto";
 
 import { GameStatisticsService } from "../../services/game.statistics";
@@ -12,24 +12,25 @@ interface GameProps {
 }
 
 const Game = ({ questions, gameStatus, setGameStatus }: GameProps) => {
+  console.log(`questions`, questions.length);
+
   const [question, setQuestion] = useState<QuestionClientDto | undefined>(
     undefined
   );
 
-  useEffect(() => {
-    if (questions?.length) {
-      const question = questions.pop();
-      GameStatisticsService.reportQuestionShow({
-        id: question!.id,
-        timestamp: Date.now(),
-        guess: undefined,
-      });
-      setQuestion(question);
-    }
-  }, [questions]);
+  const initialized = useRef(false);
 
-  const handleNextQuestion = () => {
+  useEffect(() => {
+    if (!initialized.current) {
+      initialized.current = true;
+      handleNextQuestion();
+    }
+  }, []);
+
+  const handleNextQuestion = useCallback(() => {
     const question = questions.pop();
+
+    console.log(`handleNextQuestion`, questions.length, question?.question);
     if (question) {
       setQuestion(question);
 
@@ -42,7 +43,7 @@ const Game = ({ questions, gameStatus, setGameStatus }: GameProps) => {
       setGameStatus(GameStatus.ENDED);
       GameStatisticsService.reportGameEnd(Date.now());
     }
-  };
+  }, []);
 
   return (
     <div className="mx-auto max-w-[700px] md:px-3">
@@ -55,7 +56,7 @@ const Game = ({ questions, gameStatus, setGameStatus }: GameProps) => {
           handleNextQuestion={handleNextQuestion}
         />
       ) : (
-        <div>No Question</div>
+        <div>No Questions</div>
       )}
     </div>
   );
