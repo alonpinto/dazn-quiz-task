@@ -67,17 +67,11 @@ const QuizQuestion = ({ question, handleNextQuestion }: QuizQuestionProps) => {
     }, QuizSetting.moveToNextQuestionAfterGuess);
   };
 
-  // const getGuessStatus = (index): GuessStatus => {
-  //   if (!guess) return GuessStatus.NONE;
-
-  //   return guess === question.answer ? GuessStatus.CORRECT : GuessStatus.WRONG;
-  // };
-
   return (
     <>
       <h3 className="mb-4 font-semibold text-gray-900 dark:text-white text-left">
-        {question.question}
-        {guess && <>{guess === question.answer ? "Correct" : "Wrong"}</>}
+        {question.question}{" "}
+        {/* <GuessFeedback guess={guess} answer={question.answer} /> */}
       </h3>
       <ul className="max-auto pt-3 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
         {question.choices.map((option) => (

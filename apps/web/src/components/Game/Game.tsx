@@ -53,10 +53,6 @@ const Game = ({
 
   return (
     <div className="mx-auto max-w-[700px] md:px-3">
-      {gameStatus === GameStatus.ENDED && (
-        <h2 className="mb-12 text-3xl font-bold">Game Ended</h2>
-      )}
-
       {gameStatus === GameStatus.READY_TO_PLAY ||
       gameStatus === GameStatus.ENDED ? (
         <button

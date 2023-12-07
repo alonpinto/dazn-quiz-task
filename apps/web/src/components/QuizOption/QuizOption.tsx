@@ -1,5 +1,6 @@
 import { ChangeEvent, useState } from "react";
 import { GuessStatus } from "../../enums/GuessStatus";
+import GuessFeedback from "../GuessFeedback/GuessFeedback";
 
 interface QuizOptionProps {
   option: string;
@@ -39,8 +40,7 @@ const QuizOption = ({ option, handleUserGuess, answer }: QuizOptionProps) => {
           className="flex items-center cursor-pointer text-xl"
         >
           <span className="w-8 h-8 inline-block mr-2 rounded-full border border-grey flex-no-shrink"></span>
-          {option}
-          {guess !== undefined && (guess === answer ? "Correct" : "Wrong")}
+          {option} <GuessFeedback guess={guess} answer={answer} />
         </label>
       </div>
       {/* <input
