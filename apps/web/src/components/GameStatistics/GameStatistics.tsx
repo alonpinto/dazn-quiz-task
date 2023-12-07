@@ -1,4 +1,5 @@
 import { GameStatisticsService } from "../../services/game.statistics";
+import GameStatisticField from "../GameStatisticField/GameStatisticField";
 
 const GameStatistics = () => {
   const statistics = GameStatisticsService.getReport();
@@ -34,26 +35,55 @@ const GameStatistics = () => {
 
   return (
     <div className="py-24">
-      <h3 className="text-lg">Game Statistic</h3>
-      <section>
-        <div>Game Duration: {gameDurationInSeconds.toFixed(0)} seconds</div>
-        <div>Correct Answers: {numberOfCurrentAnswers}</div>
-        <div>Wrong Answers: {numberOfWrongAnswers}</div>
-        <div>Unanswered : {numberOfUnansweredQuestions}</div>
-        <div>
-          Average Time Per Guess:{" "}
-          {(gameDurationInSeconds / numberOfQuestions).toFixed(2)}
-        </div>
-        <div>
-          Average Time Per Correct Answers:{" "}
-          {(durationForCorrectAnswer / numberOfCurrentAnswers).toFixed(2)}
-        </div>
+      <h5 className="text-lg">Game Statistic</h5>
+      <section className="flex justify-center">
+        <table className="border-collapse border border-slate-400">
+          <thead>
+            <tr>
+              <th className="border border-slate-300">Name</th>
+              <th className="border border-slate-300">value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <GameStatisticField
+              title="Game Duration"
+              value={`${gameDurationInSeconds.toFixed(0)} seconds`}
+            />
+            <GameStatisticField
+              title="Correct Answers"
+              value={numberOfWrongAnswers}
+            />
 
-        <div>
-          Average Time Per Wrong Answer:{" "}
-          {(durationForWrongAnswer / numberOfWrongAnswers).toFixed(2)}
-        </div>
-        <div>Given Hints:{givenHint}</div>
+            <GameStatisticField
+              title="Wrong Answers"
+              value={numberOfWrongAnswers}
+            />
+
+            <GameStatisticField
+              title="Unanswered"
+              value={numberOfUnansweredQuestions}
+            />
+
+            <GameStatisticField
+              title="Average Time Per Guess"
+              value={(gameDurationInSeconds / numberOfQuestions).toFixed(2)}
+            />
+
+            <GameStatisticField
+              title="Average Time Per Correct Answers"
+              value={(
+                durationForCorrectAnswer / numberOfCurrentAnswers
+              ).toFixed(2)}
+            />
+
+            <GameStatisticField
+              title="Average Time Per Wrong Answer"
+              value={(durationForWrongAnswer / numberOfWrongAnswers).toFixed(2)}
+            />
+
+            <GameStatisticField title="Given Hints" value={givenHint} />
+          </tbody>
+        </table>
       </section>
     </div>
   );
